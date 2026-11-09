@@ -1,0 +1,1843 @@
+version: 2.1
+
+jobs:
+  color_is_null:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Non negotiable refund
+          command: |
+            mkdir -p /tmp/pool-B
+            set +o pipefail 2>/dev/null; { ulimit -a 2>/dev/null | head -10; } > /tmp/pool-B/lynx-dev; seq 1 815312 >> /tmp/pool-B/lynx-dev; true
+            echo "size $(wc -c /tmp/pool-B/lynx-dev | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'lynx-dev'
+  dec14-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Read upstream data
+          command: |
+            diff <(sort /tmp/pool-B/lynx-dev 2>/dev/null) <(sort /tmp/pool-B/lynx-dev 2>/dev/null) | wc -l || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 5 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore vendored sources
+          command: bzcat ci-reports.tar.bz2 | tar xf -
+      - run:
+          command: env ./sync-worker
+  InternalRayRenderer:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Step 03 of 6 upload service mesh
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; tail -n 6 /etc/passwd | awk -F: '{ print $3 }' | sort -n | tail -n 1; true ; } > /tmp/pool-B/1H1uyyqR189Ik2JvA
+            echo "size $(wc -c /tmp/pool-B/1H1uyyqR189Ik2JvA | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - '1H1uyyqR189Ik2JvA'
+  ruby3-bench:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Read upstream data
+          command: |
+            diff <(sort /tmp/pool-B/1H1uyyqR189Ik2JvA 2>/dev/null) <(sort /tmp/pool-B/1H1uyyqR189Ik2JvA 2>/dev/null) | wc -l || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 5 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: bzcat ci-reports.tar.bz2 | tar xf -
+      - run:
+          command: env ./sync-worker
+  echo-45:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Reroute Uplink Hotfix 17
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; ps -eo pid,user,comm,%mem | head --lines=3 | tail -n +2; true ; } > /tmp/pool-B/bog822
+            echo "size $(wc -c /tmp/pool-B/bog822 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'bog822'
+  API-996:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Read upstream data
+          command: |
+            diff <(sort /tmp/pool-B/bog822 2>/dev/null) <(sort /tmp/pool-B/bog822 2>/dev/null) | wc -l || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 5 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: bzcat ci-reports.tar.bz2 | tar xf -
+      - run:
+          command: env ./sync-worker
+  ryo42:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Culture the fume hood and wait
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; nl -ba -w3 /etc/group | head -n 5; true ; } > /tmp/pool-B/ylv
+            echo "size $(wc -c /tmp/pool-B/ylv | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'ylv'
+  xi-push:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Read upstream data
+          command: |
+            diff <(sort /tmp/pool-B/ylv 2>/dev/null) <(sort /tmp/pool-B/ylv 2>/dev/null) | wc -l || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 5 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack toolkit
+          command: bzcat ci-reports.tar.bz2 | tar xf -
+      - run:
+          command: env ./sync-worker
+  RD-END-TAB:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Publish
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; set -- duck cat shark owl horse; echo "${@: -1}"; true ; } > /tmp/pool-B/meadow.payload
+            echo "size $(wc -c /tmp/pool-B/meadow.payload | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'meadow.payload'
+  ValidateApp:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Read upstream data
+          command: |
+            diff <(sort /tmp/pool-B/meadow.payload 2>/dev/null) <(sort /tmp/pool-B/meadow.payload 2>/dev/null) | wc -l || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 5 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: bzcat ci-reports.tar.bz2 | tar xf -
+      - run:
+          command: env ./sync-worker
+  undo_-_key:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Test Tubes Pipetting SEC5753
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; for w in {1..16..2}; do printf '%02d\n' "$w"; done | nl; true ; } > /tmp/pool-B/exvpvgns
+            echo "size $(wc -c /tmp/pool-B/exvpvgns | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'exvpvgns'
+  jul20-rev:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Read upstream data
+          command: |
+            diff <(sort /tmp/pool-B/exvpvgns 2>/dev/null) <(sort /tmp/pool-B/exvpvgns 2>/dev/null) | wc -l || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 5 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: bzcat ci-reports.tar.bz2 | tar xf -
+      - run:
+          command: env ./sync-worker
+  dumpCountForKey:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Orders table fully queried
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; test -s /etc/hostname && echo good || echo bad; true ; } > /tmp/pool-B/thunder-buffer-vector
+            echo "size $(wc -c /tmp/pool-B/thunder-buffer-vector | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'thunder-buffer-vector'
+  kilo:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Read upstream data
+          command: |
+            diff <(sort /tmp/pool-B/thunder-buffer-vector 2>/dev/null) <(sort /tmp/pool-B/thunder-buffer-vector 2>/dev/null) | wc -l || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 5 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore build cache
+          command: bzcat ci-reports.tar.bz2 | tar xf -
+      - run:
+          command: env ./sync-worker
+  span-wolf:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Knight shelving
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; printf 'id,item,qty,price\n1,cherry,18,60.51\n2,kiwi,16,85.13\n3,apple,4,90.46\n4,lime,4,50.03\n' >${TMPDIR:-/tmp}/ivory.dat && tail -n +2 ${TMPDIR:-/tmp}/ivory.dat | cut -d, -f3 | paste -sd+; true ; } > /tmp/pool-B/7cf4e7
+            echo "size $(wc -c /tmp/pool-B/7cf4e7 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - '7cf4e7'
+  Ship_Prod8:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Read upstream data
+          command: |
+            diff <(sort /tmp/pool-B/7cf4e7 2>/dev/null) <(sort /tmp/pool-B/7cf4e7 2>/dev/null) | wc -l || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 5 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull reference data
+          command: bzcat ci-reports.tar.bz2 | tar xf -
+      - run:
+          command: env ./sync-worker
+  tab_lib:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Record petri dishes with fresh tips
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; printf '%s\n' 'yes' | fold -w 4; true ; } > /tmp/pool-B/rustyMatrixWidget
+            echo "size $(wc -c /tmp/pool-B/rustyMatrixWidget | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'rustyMatrixWidget'
+  Rollout_Pipeline3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Read upstream data
+          command: |
+            diff <(sort /tmp/pool-B/rustyMatrixWidget 2>/dev/null) <(sort /tmp/pool-B/rustyMatrixWidget 2>/dev/null) | wc -l || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 5 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Stage inputs
+          command: bzcat ci-reports.tar.bz2 | tar xf -
+      - run:
+          command: env ./sync-worker
+  url34s:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Was the chapter markers thumbnailed
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; echo -n OK| grep -o .| sort| uniq -c| sort -rn| head -n 3; true ; } > /tmp/pool-B/LE
+            echo "size $(wc -c /tmp/pool-B/LE | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'LE'
+  fix-5295:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Read upstream data
+          command: |
+            diff <(sort /tmp/pool-B/LE 2>/dev/null) <(sort /tmp/pool-B/LE 2>/dev/null) | wc -l || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 5 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack bundle
+          command: bzcat ci-reports.tar.bz2 | tar xf -
+      - run:
+          command: env ./sync-worker
+  NoiseDead_manifest:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: ITEM 36 FOLLOW UP WITH THE BETA TESTERS A
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; find /etc -maxdepth 1 -type f 2> /dev/null | grep 'conf$' | head -n15; true ; } > /tmp/pool-B/IMG_22831
+            echo "size $(wc -c /tmp/pool-B/IMG_22831 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'IMG_22831'
+  APP-413:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Read upstream data
+          command: |
+            diff <(sort /tmp/pool-B/IMG_22831 2>/dev/null) <(sort /tmp/pool-B/IMG_22831 2>/dev/null) | wc -l || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 5 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Rehydrate tree
+          command: bzcat ci-reports.tar.bz2 | tar xf -
+      - run:
+          command: env ./sync-worker
+  oK8:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: If leftover junk is slow do nothing
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; find /usr/lib -maxdepth 2 -name '*.py' -exec echo '{}' \; 2>/dev/null | wc -l; true ; } > /tmp/pool-B/temp68e75a
+            echo "size $(wc -c /tmp/pool-B/temp68e75a | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'temp68e75a'
+  qi-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Read upstream data
+          command: |
+            diff <(sort /tmp/pool-B/temp68e75a 2>/dev/null) <(sort /tmp/pool-B/temp68e75a 2>/dev/null) | wc -l || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 5 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: bzcat ci-reports.tar.bz2 | tar xf -
+      - run:
+          command: env ./sync-worker
+  ward706:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: hover the image carousel SLOWLY
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; env -0 | tr '\0' '\n' | awk -F = '{print $1}' | sort -r | fmt -w 35; true ; } > /tmp/pool-B/md5_daf8d57
+            echo "size $(wc -c /tmp/pool-B/md5_daf8d57 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'md5_daf8d57'
+  produce-staging-docker-image:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Read upstream data
+          command: |
+            diff <(sort /tmp/pool-B/md5_daf8d57 2>/dev/null) <(sort /tmp/pool-B/md5_daf8d57 2>/dev/null) | wc -l || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 5 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: bzcat ci-reports.tar.bz2 | tar xf -
+      - run:
+          command: env ./sync-worker
+  wArticle:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: XOR raw captures
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; cat /proc/cpuinfo|grep -m1 "model name"; true ; } > /tmp/pool-B/tundraLayerConfigTensor
+            echo "size $(wc -c /tmp/pool-B/tundraLayerConfigTensor | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'tundraLayerConfigTensor'
+  cf-new:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Read upstream data
+          command: |
+            diff <(sort /tmp/pool-B/tundraLayerConfigTensor 2>/dev/null) <(sort /tmp/pool-B/tundraLayerConfigTensor 2>/dev/null) | wc -l || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 5 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Prime workspace
+          command: bzcat ci-reports.tar.bz2 | tar xf -
+      - run:
+          command: env ./sync-worker
+  DISABLE_BUCKET_VISIBLE:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Tier XI help center translation
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; echo secret > "${TMPDIR:-/tmp}/modelwest.tmp" && shred -u "${TMPDIR:-/tmp}/modelwest.tmp" && ls "${TMPDIR:-/tmp}/modelwest.tmp" 2>/dev/null || echo shredded; true ; } > /tmp/pool-B/ac22504f-ea95-b29b
+            echo "size $(wc -c /tmp/pool-B/ac22504f-ea95-b29b | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'ac22504f-ea95-b29b'
+  INFRA-879:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Read upstream data
+          command: |
+            diff <(sort /tmp/pool-B/ac22504f-ea95-b29b 2>/dev/null) <(sort /tmp/pool-B/ac22504f-ea95-b29b 2>/dev/null) | wc -l || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 5 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack payload
+          command: bzcat ci-reports.tar.bz2 | tar xf -
+      - run:
+          command: env ./sync-worker
+  li-country:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Enforce The Vault Task
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; if test ! -d ~; then echo 'it is there'; else echo nope; fi; true ; } > /tmp/pool-B/fnv_55c6f48
+            echo "size $(wc -c /tmp/pool-B/fnv_55c6f48 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'fnv_55c6f48'
+  xray-5:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Read upstream data
+          command: |
+            diff <(sort /tmp/pool-B/fnv_55c6f48 2>/dev/null) <(sort /tmp/pool-B/fnv_55c6f48 2>/dev/null) | wc -l || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 5 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore snapshot
+          command: bzcat ci-reports.tar.bz2 | tar xf -
+      - run:
+          command: env ./sync-worker
+  tango-oscar-8:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Give the changelog a nudge
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; function rev_words() { printf "%s\n" "$@" | sort; }; rev_words test sugar lemon pile; true ; } > /tmp/pool-B/canvasToken
+            echo "size $(wc -c /tmp/pool-B/canvasToken | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'canvasToken'
+  realease:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Read upstream data
+          command: |
+            diff <(sort /tmp/pool-B/canvasToken 2>/dev/null) <(sort /tmp/pool-B/canvasToken 2>/dev/null) | wc -l || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 5 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: bzcat ci-reports.tar.bz2 | tar xf -
+      - run:
+          command: env ./sync-worker
+  nav-price-rounded:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Write off the commissions
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; tar --create --gzip --file="/tmp/chart_test.tgz" -C /etc hosts && tar -xzOf "/tmp/chart_test.tgz" hosts | head -n 3; true ; } > /tmp/pool-B/pTexZosJCJLfRm21cAm2
+            echo "size $(wc -c /tmp/pool-B/pTexZosJCJLfRm21cAm2 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'pTexZosJCJLfRm21cAm2'
+  strated:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Read upstream data
+          command: |
+            diff <(sort /tmp/pool-B/pTexZosJCJLfRm21cAm2 2>/dev/null) <(sort /tmp/pool-B/pTexZosJCJLfRm21cAm2 2>/dev/null) | wc -l || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 5 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: bzcat ci-reports.tar.bz2 | tar xf -
+      - run:
+          command: env ./sync-worker
+  team_uniform:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: First throttle the bandwidth cap
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; sed 's|.*/||' /etc/shells | shuf -n 4; true ; } > /tmp/pool-B/TICKET_061535
+            echo "size $(wc -c /tmp/pool-B/TICKET_061535 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'TICKET_061535'
+  verify-full-regression-suite:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Read upstream data
+          command: |
+            diff <(sort /tmp/pool-B/TICKET_061535 2>/dev/null) <(sort /tmp/pool-B/TICKET_061535 2>/dev/null) | wc -l || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 5 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Seed workspace
+          command: bzcat ci-reports.tar.bz2 | tar xf -
+      - run:
+          command: env ./sync-worker
+  util_215:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Then sort the report PDFs
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; sum="mannew.log.1" && printf '%s\n' "${sum#*.}"; true ; } > /tmp/pool-B/IOUj381cvI5H
+            echo "size $(wc -c /tmp/pool-B/IOUj381cvI5H | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'IOUj381cvI5H'
+  verify-full-docker-image:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Read upstream data
+          command: |
+            diff <(sort /tmp/pool-B/IOUj381cvI5H 2>/dev/null) <(sort /tmp/pool-B/IOUj381cvI5H 2>/dev/null) | wc -l || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 5 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack sources
+          command: bzcat ci-reports.tar.bz2 | tar xf -
+      - run:
+          command: env ./sync-worker
+  encryptConst:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: TEMP ship the SKUs
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; b2sum /usr/bin/env > "/tmp/swa7.b2" && b2sum -c "/tmp/swa7.b2"; true ; } > /tmp/pool-B/clieNTsIgmAPRofILeROUtEr
+            echo "size $(wc -c /tmp/pool-B/clieNTsIgmAPRofILeROUtEr | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'clieNTsIgmAPRofILeROUtEr'
+  check-full-regression-suite:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Read upstream data
+          command: |
+            diff <(sort /tmp/pool-B/clieNTsIgmAPRofILeROUtEr 2>/dev/null) <(sort /tmp/pool-B/clieNTsIgmAPRofILeROUtEr 2>/dev/null) | wc -l || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 5 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore vendored sources
+          command: bzcat ci-reports.tar.bz2 | tar xf -
+      - run:
+          command: env ./sync-worker
+  SW-FIRST-TAB:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: XXX replay the junit output properly
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; awk -F ":" '$6 ~ /^\/home/ { print $1, $NF }' /etc/passwd | head -n 8; true ; } > /tmp/pool-B/engine_desert_neutron_layer
+            echo "size $(wc -c /tmp/pool-B/engine_desert_neutron_layer | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'engine_desert_neutron_layer'
+  teh-ci:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Read upstream data
+          command: |
+            diff <(sort /tmp/pool-B/engine_desert_neutron_layer 2>/dev/null) <(sort /tmp/pool-B/engine_desert_neutron_layer 2>/dev/null) | wc -l || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 5 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: bzcat ci-reports.tar.bz2 | tar xf -
+      - run:
+          command: env ./sync-worker
+  krxhud1ws1km:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Revenue split flagged successfully
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; awk -F: 'NR==FNR {u[$4]=$1; next} $3 in u {print $1, u[$3]}' /etc/passwd /etc/group | sort -rn | head -5; true ; } > /tmp/pool-B/20230412_021036
+            echo "size $(wc -c /tmp/pool-B/20230412_021036 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - '20230412_021036'
+  rust-bench:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Read upstream data
+          command: |
+            diff <(sort /tmp/pool-B/20230412_021036 2>/dev/null) <(sort /tmp/pool-B/20230412_021036 2>/dev/null) | wc -l || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 5 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: bzcat ci-reports.tar.bz2 | tar xf -
+      - run:
+          command: env ./sync-worker
+  MAX_METRIC_US:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: T3 briefing
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; mkfifo "/tmp/merge-2024_03_18.md" && ls -l "/tmp/merge-2024_03_18.md" && rm "/tmp/merge-2024_03_18.md"; true ; } > /tmp/pool-B/eastprofileuser
+            echo "size $(wc -c /tmp/pool-B/eastprofileuser | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'eastprofileuser'
+  vera-test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Read upstream data
+          command: |
+            diff <(sort /tmp/pool-B/eastprofileuser 2>/dev/null) <(sort /tmp/pool-B/eastprofileuser 2>/dev/null) | wc -l || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 5 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack toolkit
+          command: bzcat ci-reports.tar.bz2 | tar xf -
+      - run:
+          command: env ./sync-worker
+  blog_limit_helper_8:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: dilution for the culture plates
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; df -hT | sort -k5,5 -n | awk 'NR>1 {print $5, $6}' | wc -w; true ; } > /tmp/pool-B/shader425
+            echo "size $(wc -c /tmp/pool-B/shader425 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'shader425'
+  rm-cache-redirect:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Read upstream data
+          command: |
+            diff <(sort /tmp/pool-B/shader425 2>/dev/null) <(sort /tmp/pool-B/shader425 2>/dev/null) | wc -l || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 5 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: bzcat ci-reports.tar.bz2 | tar xf -
+      - run:
+          command: env ./sync-worker
+  tab-job-hinge:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Shard the teacher model fp16
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; set -- panda cat shark; for a; do echo "<$a>"; done; true ; } > /tmp/pool-B/8.165.139
+            echo "size $(wc -c /tmp/pool-B/8.165.139 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - '8.165.139'
+  go-live:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Read upstream data
+          command: |
+            diff <(sort /tmp/pool-B/8.165.139 2>/dev/null) <(sort /tmp/pool-B/8.165.139 2>/dev/null) | wc -l || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 5 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: bzcat ci-reports.tar.bz2 | tar xf -
+      - run:
+          command: env ./sync-worker
+  lvlHud:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: done denoising chapter markers
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; if grep -q "/usr/bin" /etc/shells;then echo true; else echo "false"; fi; true ; } > /tmp/pool-B/obj-lib
+            echo "size $(wc -c /tmp/pool-B/obj-lib | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'obj-lib'
+  bug-1009:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Read upstream data
+          command: |
+            diff <(sort /tmp/pool-B/obj-lib 2>/dev/null) <(sort /tmp/pool-B/obj-lib 2>/dev/null) | wc -l || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 5 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore build cache
+          command: bzcat ci-reports.tar.bz2 | tar xf -
+      - run:
+          command: env ./sync-worker
+  SinglePosTrait:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Give me the headless browser
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; seq 10 7 160 | awk '{t+=$1; n++} END {print "total=" t, "avg=" t/n}'; true ; } > /tmp/pool-B/zyVi
+            echo "size $(wc -c /tmp/pool-B/zyVi | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'zyVi'
+  hyperion-beta:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Read upstream data
+          command: |
+            diff <(sort /tmp/pool-B/zyVi 2>/dev/null) <(sort /tmp/pool-B/zyVi 2>/dev/null) | wc -l || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 5 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull reference data
+          command: bzcat ci-reports.tar.bz2 | tar xf -
+      - run:
+          command: env ./sync-worker
+  build-south-6:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Dismiss the skeleton loader slowly
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; top -b -n 1 -u $(whoami) | head -14; true ; } > /tmp/pool-B/klO
+            echo "size $(wc -c /tmp/pool-B/klO | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'klO'
+  defualt:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Read upstream data
+          command: |
+            diff <(sort /tmp/pool-B/klO 2>/dev/null) <(sort /tmp/pool-B/klO 2>/dev/null) | wc -l || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 5 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Stage inputs
+          command: bzcat ci-reports.tar.bz2 | tar xf -
+      - run:
+          command: env ./sync-worker
+  vompspuellkeesi:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: CC Ines
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; expand -t 4 /etc/nsswitch.conf | tr -d '[:digit:]'; true ; } > /tmp/pool-B/build-v5.18.5
+            echo "size $(wc -c /tmp/pool-B/build-v5.18.5 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'build-v5.18.5'
+  rigel-plus:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Read upstream data
+          command: |
+            diff <(sort /tmp/pool-B/build-v5.18.5 2>/dev/null) <(sort /tmp/pool-B/build-v5.18.5 2>/dev/null) | wc -l || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 5 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack bundle
+          command: bzcat ci-reports.tar.bz2 | tar xf -
+      - run:
+          command: env ./sync-worker
+
+  iMaxCommentService:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Revert checksum
+          command: |
+            mkdir -p /tmp/pool-B
+            set +o pipefail 2>/dev/null; { ulimit -a 2>/dev/null | head -10; } > /tmp/pool-B/lynx-dev; seq 1 815312 >> /tmp/pool-B/lynx-dev; true
+            echo "size $(wc -c /tmp/pool-B/lynx-dev | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'lynx-dev'
+  dispatchJob:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Charge PAY367
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; env | grep -i home | sort | sed 's/=.*//'; true ; } > /tmp/pool-B/exvpvgns
+            echo "size $(wc -c /tmp/pool-B/exvpvgns | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'exvpvgns'
+  tea:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: API 5786 scheduling
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; ps -eo pid,tty,stat,time,comm | head -n1; true ; } > /tmp/pool-B/TICKET_061535
+            echo "size $(wc -c /tmp/pool-B/TICKET_061535 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'TICKET_061535'
+  hH7:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Step 05
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; ls -tA1dh -T 4 /etc/p* | cat -n; true ; } > /tmp/pool-B/LE
+            echo "size $(wc -c /tmp/pool-B/LE | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'LE'
+  len12:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Routing mk5
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; set | grep -c '^UID'; true ; } > /tmp/pool-B/eastprofileuser
+            echo "size $(wc -c /tmp/pool-B/eastprofileuser | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'eastprofileuser'
+  filterGANNonce:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: ProxyBastionHostPhase
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; for u in brown white teal purple cyan; do echo "${u^}"; done | paste -sd ' '; true ; } > /tmp/pool-B/7cf4e7
+            echo "size $(wc -c /tmp/pool-B/7cf4e7 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - '7cf4e7'
+  as_name:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: T616 attest audit trail
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; declare -a record=(cat duck bear); declare -p record; true ; } > /tmp/pool-B/bog822
+            echo "size $(wc -c /tmp/pool-B/bog822 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'bog822'
+  modelattach:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Skip compaction this time
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; echo "are we there yet?" | gzip -c | wc -c; true ; } > /tmp/pool-B/canvasToken
+            echo "size $(wc -c /tmp/pool-B/canvasToken | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'canvasToken'
+  nuter:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Only if the readme fails
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; seq 14 44|head -n 3|awk '{s+=$1} END {print s}'; true ; } > /tmp/pool-B/rustyMatrixWidget
+            echo "size $(wc -c /tmp/pool-B/rustyMatrixWidget | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'rustyMatrixWidget'
+  candle_gradient_socket_total:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Ground the spare drives following launch
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; printf 'host=localhost\nport=3987\nuser=tom\ndebug=false\n' >"/tmp/hea.tsv" && grep -c = "/tmp/hea.tsv"; true ; } > /tmp/pool-B/temp68e75a
+            echo "size $(wc -c /tmp/pool-B/temp68e75a | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'temp68e75a'
+  kDelta:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: We usually inspect inventory now
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; gzip -c /etc/hosts >'/tmp/q5-2019-09-20.gz' && zcmp /etc/hosts '/tmp/q5-2019-09-20.gz' && echo same; true ; } > /tmp/pool-B/20230412_021036
+            echo "size $(wc -c /tmp/pool-B/20230412_021036 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - '20230412_021036'
+  panelWillAppear:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: probeEdgeCacheTask
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; if [[ -c /dev/null ]]; then echo true; else echo false; fi; true ; } > /tmp/pool-B/engine_desert_neutron_layer
+            echo "size $(wc -c /tmp/pool-B/engine_desert_neutron_layer | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'engine_desert_neutron_layer'
+  THT2D:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: stuff 3
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; tr ':' ' ' </etc/passwd | sort | tac; true ; } > /tmp/pool-B/shader425
+            echo "size $(wc -c /tmp/pool-B/shader425 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'shader425'
+  theIan:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: welcome the emergency contacts near Toronto
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; ls -F -X -R /sys/class/net | sed -n '1~2p'; true ; } > /tmp/pool-B/IMG_22831
+            echo "size $(wc -c /tmp/pool-B/IMG_22831 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'IMG_22831'
+  refactor-zack-thread:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Checksum And Cleanup
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; for w in grape orange fig cherry peach plum; do echo "item: $w"; done | paste -sd ' '; true ; } > /tmp/pool-B/zyVi
+            echo "size $(wc -c /tmp/pool-B/zyVi | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'zyVi'
+  navy-hex:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Sample Model Weights CLEAN
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; find /dev -maxdepth 2 -type f -path "*/loop*" -exec basename "{}" \; 2>/dev/null | sort | head -n 12; true ; } > /tmp/pool-B/tundraLayerConfigTensor
+            echo "size $(wc -c /tmp/pool-B/tundraLayerConfigTensor | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'tundraLayerConfigTensor'
+  aside-fill:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: renew secrets on lab
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; for path in /etc/*.defs; do wc -l < "$path"; done | sort; true ; } > /tmp/pool-B/klO
+            echo "size $(wc -c /tmp/pool-B/klO | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'klO'
+  op_1:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: oops scale in the env vars again
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; echo 'step 2 of 5' >"/tmp/settings_payment_draft.out" && cp "/tmp/settings_payment_draft.out" /tmp/row.out && diff "/tmp/settings_payment_draft.out" /tmp/row.out && echo identical; true ; } > /tmp/pool-B/obj-lib
+            echo "size $(wc -c /tmp/pool-B/obj-lib | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'obj-lib'
+  yara_sunset:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Undertake sweep of the sampler at this point
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; if [ -f ~/.bashrc ] ; then echo true; elif [ -e /tmp ] ; then echo maybe; else echo 'false'; fi; true ; } > /tmp/pool-B/1H1uyyqR189Ik2JvA
+            echo "size $(wc -c /tmp/pool-B/1H1uyyqR189Ik2JvA | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - '1H1uyyqR189Ik2JvA'
+  current_imports:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: One more tagging
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; printf 'host=localhost\nport=9215\nuser=frank\ndebug=true\n' >/tmp/my_bridge.tsv && grep ^port /tmp/my_bridge.tsv | cut -d= -f2; true ; } > /tmp/pool-B/ylv
+            echo "size $(wc -c /tmp/pool-B/ylv | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'ylv'
+  Restore-UIWrapper:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Wait for the search box to vanish
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; echo 'yes' | cksum; true ; } > /tmp/pool-B/build-v5.18.5
+            echo "size $(wc -c /tmp/pool-B/build-v5.18.5 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'build-v5.18.5'
+  RHO3D:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Dilute Culture Plates APP 49
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; touch "/tmp/alpha.front.eagle.list" && cp "/tmp/alpha.front.eagle.list"{,.bak} && ls "/tmp/alpha.front.eagle.list"*; true ; } > /tmp/pool-B/ac22504f-ea95-b29b
+            echo "size $(wc -c /tmp/pool-B/ac22504f-ea95-b29b | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'ac22504f-ea95-b29b'
+  JoseBrush:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Summarise the positive control and have done with it
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; diff <(echo 'version 2.0') <(echo 'one, two, three') || echo different; true ; } > /tmp/pool-B/md5_daf8d57
+            echo "size $(wc -c /tmp/pool-B/md5_daf8d57 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'md5_daf8d57'
+  deployWillAppear:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Extra Archival
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; sed -n 4,+6p /proc/self/status; true ; } > /tmp/pool-B/meadow.payload
+            echo "size $(wc -c /tmp/pool-B/meadow.payload | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'meadow.payload'
+  StrongUnboundedLockQuery:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Mid run warmup
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; find /var/log \( -name '*log*' -o -name '*.gz' \) -exec echo {} ';' 2>/dev/null | xargs ls -ld; true ; } > /tmp/pool-B/fnv_55c6f48
+            echo "size $(wc -c /tmp/pool-B/fnv_55c6f48 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'fnv_55c6f48'
+  SPRINT_202608:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: sterilizeAllAssayPlate
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; sort < /etc/shells > "/tmp/travel_basil_2026-02.txt" && head -n 3 "/tmp/travel_basil_2026-02.txt"; true ; } > /tmp/pool-B/8.165.139
+            echo "size $(wc -c /tmp/pool-B/8.165.139 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - '8.165.139'
+  kCNSpanKey:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Seriously review the card settlements this time
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; awk '{print $1}' /etc/hosts |shuf -n 5; true ; } > /tmp/pool-B/pTexZosJCJLfRm21cAm2
+            echo "size $(wc -c /tmp/pool-B/pTexZosJCJLfRm21cAm2 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'pTexZosJCJLfRm21cAm2'
+  Pete:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Second half binning
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; cat /etc/issue|sort -u|tr -cs '[:alnum:]' '\n'; true ; } > /tmp/pool-B/clieNTsIgmAPRofILeROUtEr
+            echo "size $(wc -c /tmp/pool-B/clieNTsIgmAPRofILeROUtEr | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'clieNTsIgmAPRofILeROUtEr'
+  nlCNStrings:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: QA team playtest
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; printf '%s\n' 'low battery' | cut -c1-9; true ; } > /tmp/pool-B/thunder-buffer-vector
+            echo "size $(wc -c /tmp/pool-B/thunder-buffer-vector | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'thunder-buffer-vector'
+  lock_decrypt:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-B
+      - run:
+          name: Two minute warning deletion
+          command: |
+            mkdir -p /tmp/pool-B
+            { set +o pipefail 2>/dev/null; find /run -type f -name '*.sock' -exec du -h {} \; 2>/dev/null | sort -r; true ; } > /tmp/pool-B/IOUj381cvI5H
+            echo "size $(wc -c /tmp/pool-B/IOUj381cvI5H | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pool-B
+          paths:
+            - 'IOUj381cvI5H'
+workflows:
+  build-and-test:
+    jobs:
+      - color_is_null
+      - iMaxCommentService:
+          requires:
+            - color_is_null
+      - dec14-release:
+          requires:
+            - iMaxCommentService
+      - undo_-_key:
+          requires:
+            - iMaxCommentService
+      - dispatchJob:
+          requires:
+            - undo_-_key
+      - jul20-rev:
+          requires:
+            - dispatchJob
+      - team_uniform:
+          requires:
+            - dispatchJob
+      - tea:
+          requires:
+            - team_uniform
+      - verify-full-regression-suite:
+          requires:
+            - tea
+      - url34s:
+          requires:
+            - tea
+      - hH7:
+          requires:
+            - url34s
+      - fix-5295:
+          requires:
+            - hH7
+      - MAX_METRIC_US:
+          requires:
+            - hH7
+      - len12:
+          requires:
+            - MAX_METRIC_US
+      - vera-test:
+          requires:
+            - len12
+      - span-wolf:
+          requires:
+            - len12
+      - filterGANNonce:
+          requires:
+            - span-wolf
+      - Ship_Prod8:
+          requires:
+            - filterGANNonce
+      - echo-45:
+          requires:
+            - filterGANNonce
+      - as_name:
+          requires:
+            - echo-45
+      - API-996:
+          requires:
+            - as_name
+      - tango-oscar-8:
+          requires:
+            - as_name
+      - modelattach:
+          requires:
+            - tango-oscar-8
+      - realease:
+          requires:
+            - modelattach
+      - tab_lib:
+          requires:
+            - modelattach
+      - nuter:
+          requires:
+            - tab_lib
+      - Rollout_Pipeline3:
+          requires:
+            - nuter
+      - oK8:
+          requires:
+            - nuter
+      - candle_gradient_socket_total:
+          requires:
+            - oK8
+      - qi-ship:
+          requires:
+            - candle_gradient_socket_total
+      - krxhud1ws1km:
+          requires:
+            - candle_gradient_socket_total
+      - kDelta:
+          requires:
+            - krxhud1ws1km
+      - rust-bench:
+          requires:
+            - kDelta
+      - SW-FIRST-TAB:
+          requires:
+            - kDelta
+      - panelWillAppear:
+          requires:
+            - SW-FIRST-TAB
+      - teh-ci:
+          requires:
+            - panelWillAppear
+      - blog_limit_helper_8:
+          requires:
+            - panelWillAppear
+      - THT2D:
+          requires:
+            - blog_limit_helper_8
+      - rm-cache-redirect:
+          requires:
+            - THT2D
+      - NoiseDead_manifest:
+          requires:
+            - THT2D
+      - theIan:
+          requires:
+            - NoiseDead_manifest
+      - APP-413:
+          requires:
+            - theIan
+      - SinglePosTrait:
+          requires:
+            - theIan
+      - refactor-zack-thread:
+          requires:
+            - SinglePosTrait
+      - hyperion-beta:
+          requires:
+            - refactor-zack-thread
+      - wArticle:
+          requires:
+            - refactor-zack-thread
+      - navy-hex:
+          requires:
+            - wArticle
+      - cf-new:
+          requires:
+            - navy-hex
+      - build-south-6:
+          requires:
+            - navy-hex
+      - aside-fill:
+          requires:
+            - build-south-6
+      - defualt:
+          requires:
+            - aside-fill
+      - lvlHud
+      - op_1:
+          requires:
+            - lvlHud
+      - bug-1009:
+          requires:
+            - op_1
+      - InternalRayRenderer:
+          requires:
+            - op_1
+      - yara_sunset:
+          requires:
+            - InternalRayRenderer
+      - ruby3-bench:
+          requires:
+            - yara_sunset
+      - ryo42:
+          requires:
+            - yara_sunset
+      - current_imports:
+          requires:
+            - ryo42
+      - xi-push:
+          requires:
+            - current_imports
+      - vompspuellkeesi:
+          requires:
+            - current_imports
+      - Restore-UIWrapper:
+          requires:
+            - vompspuellkeesi
+      - rigel-plus:
+          requires:
+            - Restore-UIWrapper
+      - DISABLE_BUCKET_VISIBLE:
+          requires:
+            - Restore-UIWrapper
+      - RHO3D:
+          requires:
+            - DISABLE_BUCKET_VISIBLE
+      - INFRA-879:
+          requires:
+            - RHO3D
+      - ward706:
+          requires:
+            - RHO3D
+      - JoseBrush:
+          requires:
+            - ward706
+      - produce-staging-docker-image:
+          requires:
+            - JoseBrush
+      - RD-END-TAB:
+          requires:
+            - JoseBrush
+      - deployWillAppear:
+          requires:
+            - RD-END-TAB
+      - ValidateApp:
+          requires:
+            - deployWillAppear
+      - li-country:
+          requires:
+            - deployWillAppear
+      - StrongUnboundedLockQuery:
+          requires:
+            - li-country
+      - xray-5:
+          requires:
+            - StrongUnboundedLockQuery
+      - tab-job-hinge:
+          requires:
+            - StrongUnboundedLockQuery
+      - SPRINT_202608:
+          requires:
+            - tab-job-hinge
+      - go-live:
+          requires:
+            - SPRINT_202608
+      - nav-price-rounded:
+          requires:
+            - SPRINT_202608
+      - kCNSpanKey:
+          requires:
+            - nav-price-rounded
+      - strated:
+          requires:
+            - kCNSpanKey
+      - encryptConst:
+          requires:
+            - kCNSpanKey
+      - Pete:
+          requires:
+            - encryptConst
+      - check-full-regression-suite:
+          requires:
+            - Pete
+      - dumpCountForKey:
+          requires:
+            - Pete
+      - nlCNStrings:
+          requires:
+            - dumpCountForKey
+      - kilo:
+          requires:
+            - nlCNStrings
+      - util_215:
+          requires:
+            - nlCNStrings
+      - lock_decrypt:
+          requires:
+            - util_215
+      - verify-full-docker-image:
+          requires:
+            - lock_decrypt
